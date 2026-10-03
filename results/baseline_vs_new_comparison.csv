@@ -1,0 +1,5 @@
+Model,Old Baseline Acc,New Test Acc,Old Baseline F1,New Test F1,Old Baseline ROC-AUC,New Test ROC-AUC,Old Baseline FPR,New Test FPR,Imbalanced Set F1,Unseen Attack F1,Latency (ms)
+Random Forest,-,91.28%,-,0.9090,-,0.9849,-,4.56%,0.7494,1.0000,0.010 ms
+SVM (RBF),-,91.78%,-,0.9138,-,0.9652,-,3.56%,0.7979,0.9993,0.177 ms
+KNN,90.83%,92.39%,0.9077,0.9219,0.9768,0.9846,8.44%,5.11%,0.7839,1.0000,0.097 ms
+Logistic Regression,-,90.56%,-,0.9037,-,0.9567,-,7.56%,0.6624,1.0000,0.000 ms

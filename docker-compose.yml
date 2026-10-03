@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  ddos-framework:
+    build: .
+    container_name: ddos_sdn_framework
+    restart: unless-stopped
+    ports:
+      - "8000:8000"   # FastAPI Backend
+      - "3000:3000"   # React + Vite Dashboard
+      - "6653:6653"   # OpenFlow Controller Port
+      - "2055:2055/udp" # NetFlow/IPFIX Collector
+      - "8443:8443"   # External Traffic Telemetry Sniffer
+    environment:
+      - BACKEND_HOST=0.0.0.0
+      - BACKEND_PORT=8000
+      - DETECTION_THRESHOLD=0.50
+      - MITIGATION_ENABLED=True
+      - BLOCK_DURATION=60
+      - DATABASE_URL=sqlite:///ddos_framework.db
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./results:/app/results
+      - ./logs:/app/logs
+
+  # Note on Mininet:
+  # Native Mininet requires Linux kernel network namespaces and Open vSwitch kernel modules.
+  # For Linux hosts, Mininet should be run on the host or inside a privileged container mounting /lib/modules.

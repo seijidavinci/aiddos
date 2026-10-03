@@ -1,0 +1,56 @@
+# Configuration for AI-Driven DDoS Detection and Mitigation Framework
+
+system:
+  project_name: "AI-Driven DDoS Detection and Automated Mitigation Framework in SDN"
+  environment: "production"
+  random_seed: 42
+
+paths:
+  model_path: "models/best_model.joblib"
+  pipeline_path: "models/scaler.joblib"
+  feature_metadata_path: "models/feature_metadata.json"
+  raw_dataset: "ready_dataset.csv"
+  database_url: "sqlite:///ddos_framework.db"
+
+sdn_controller:
+  host: "0.0.0.0"
+  controller_port: 6653
+  flow_poll_interval: 2.0
+  openflow_version: "OpenFlow13"
+  table_miss_priority: 0
+  mitigation_rule_priority: 1000
+
+detection:
+  detection_threshold: 0.50
+  feature_count: 14
+  features:
+    - flow_duration
+    - packet_count
+    - byte_count
+    - packet_rate
+    - byte_rate
+    - packet_size_mean
+    - packet_size_std
+    - flow_iat_mean
+    - flow_iat_std
+    - syn_flag_count
+    - ack_flag_count
+    - down_up_ratio
+    - protocol_encoded
+    - dst_port_encoded
+
+mitigation:
+  mitigation_enabled: true
+  block_duration: 60
+  duplicate_prevention: true
+  auto_expiry: true
+
+backend:
+  backend_host: "127.0.0.1"
+  backend_port: 8000
+
+telemetry:
+  primary_source: "OpenFlow_1.3"
+  netflow_port: 2055
+  external_sniffer_port: 8443
+  https_port: 443

@@ -1,0 +1,22 @@
+{
+  "dataset_name": "ready_dataset.csv",
+  "total_rows_trained": 9209309,
+  "total_benign": 2384051,
+  "total_ddos": 6825258,
+  "training_time_sec": 117.49125576019287,
+  "test_samples": 40000,
+  "accuracy": 0.9889,
+  "f1_score": 0.9943251533742331,
+  "roc_auc": 0.999454984517262,
+  "fpr": 0.0030303030303030303,
+  "confusion_matrix": [
+    [
+      658,
+      2
+    ],
+    [
+      442,
+      38898
+    ]
+  ]
+}

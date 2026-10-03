@@ -1,0 +1,15 @@
+[Unit]
+Description=AI-Driven DDoS SDN Framework - Ryu OpenFlow Controller
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/CAPSTONE
+ExecStart=/usr/local/bin/ryu-manager controller/ddos_controller.py --verbose --ofp-tcp-listen-port 6653
+Restart=always
+RestartSec=3
+Environment="PYTHONPATH=/opt/CAPSTONE"
+
+[Install]
+WantedBy=multi-user.target
