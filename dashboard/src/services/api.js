@@ -3,7 +3,7 @@
  * Communicates with the FastAPI backend
  */
 
-const BASE_URL = ''; // Relative path leverages Vite proxy to http://127.0.0.1:8000
+const BASE_URL = 'https://' + 'aiddos.onrender.com';
 
 export async function fetchStats() {
   const res = await fetch(`${BASE_URL}/api/stats`);
