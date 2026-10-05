@@ -35,8 +35,11 @@ class FlowMonitor:
             delta_pkts = max(0.0, current_pkts - prev["packet_count"])
             delta_bytes = max(0.0, current_bytes - prev["byte_count"])
 
-            updated_flow["packet_rate"] = delta_pkts / delta_t
-            updated_flow["byte_rate"] = delta_bytes / delta_t
+            # Preserve an explicitly supplied synthetic/simulator rate when
+            # the packet counter does not increase between samples.
+            if delta_pkts > 0:
+                updated_flow["packet_rate"] = delta_pkts / delta_t
+                updated_flow["byte_rate"] = delta_bytes / delta_t
         else:
             dur = max(float(flow.get("duration_sec", 0.001)), 0.001)
             updated_flow["packet_rate"] = current_pkts / dur
