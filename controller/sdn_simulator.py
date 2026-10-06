@@ -193,6 +193,12 @@ class SDNEndToEndEngine:
         """Continuous SDN Flow Statistics Polling Loop (every FLOW_POLL_INTERVAL)."""
         while self.running:
             time.sleep(FLOW_POLL_INTERVAL)
+
+            # Periodically remove flow-history entries that have gone stale.
+            # This prevents unbounded memory growth during long-running
+            # simulation and telemetry sessions.
+            self.monitor.prune_stale_flows(timeout_sec=60.0)
+
             stats = self.switch.get_flow_stats()
             for r in stats:
                 if r["priority"] <= 0 or r["action"] == "DROP":
